@@ -15,24 +15,24 @@ func main() {
 
 
     d := make(chan string)
-    fmt.Println(d)
-    go boring("boring!", d, 1)
-    go boring("boring!", d, 2)
-    go boring("boring!", d, 3)
-    go boring("boring!", d, 4)
-    go boring("boring!", d, 5)
-    go boring("boring!", d, 6)
-    go boring("boring!", d, 7)
-    go boring("boring!", d, 8)
+    fmt.Println("Channel: ",d)
+    go threadcreator("one", d, 1)
+    go threadcreator("two", d, 2)
+    go threadcreator("three", d, 3)
+    go threadcreator("four", d, 4)
+    go threadcreator("five", d, 5)
+    go threadcreator("six", d, 6)
+    go threadcreator("seven", d, 7)
+    go threadcreator("eight", d, 8)
 
     for i := 0; i < 100; i++ {
         time.Sleep(time.Second);
     }
 
-    fmt.Println("You're boring; I'm leaving.")
+    fmt.Println("Finishing.")
 }
 
-func boring(msg string, c chan string, id int) {
+func threadcreator(msg string, c chan string, id int) {
     for i := 0; ; i++ {
 
     }
