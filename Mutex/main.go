@@ -17,7 +17,7 @@ func main() {
     var readOps uint64
     var writeOps uint64
 
-    for r := 0; r < 100; r++ {
+    for r := 0; r < 1000000; r++ {
         go func() {
             total := 0
             for {
@@ -33,7 +33,7 @@ func main() {
         }()
     }
 
-    for w := 0; w < 10; w++ {
+    for w := 0; w < 100000; w++ {
         go func() {
             for {
                 key := rand.Intn(5)
