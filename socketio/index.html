@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Go WebSocket Tutorial</title>
+  </head>
+  <body>
+    <h2>Hello </h2>
+
+    <script type = "text/javascript">
+        let socket = new WebSocket("ws://172.17.187.33:8080/ws");
+        console.log("Attempting Connection...");
+        socket.onopen = () => {
+            console.log("Successfully Connected");
+            socket.send("Hi From the Client!")
+        };
+        socket.onclose = event => {
+            console.log("Socket Closed Connection: ", event);
+            socket.send("Client Closed!")
+        };
+
+        socket.onerror = error => {
+            console.log("Socket Error: ", error);
+        };
+
+        function testResults (form) {
+            var TestVar = form.inputbox.value;
+            //alert ("You typed: " + TestVar);
+            socket.send(TestVar)
+        }
+    </script>
+
+    <FORM NAME="myform" ACTION="" METHOD="GET">Message: 
+    <INPUT TYPE="text" NAME="inputbox" VALUE=""><P>
+    <INPUT TYPE="button" NAME="button" Value="Click" onClick="testResults(this.form)">
+    </FORM>
+    <br>
+
+    <table>
+        <tr>
+            <td width="200px">WS Protocol</td>
+            <td>
+                <select id="protocol">
+                    <option value="ws" selected="selected">ws</option>
+                    <option value="wss">wss</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>WS Hostname</td>
+            <td><input type="text" id="hostname"/></td>
+        </tr>
+        <tr>
+            <td>WS Port</td>
+            <td><input type="text" id="port"/></td>
+        </tr>
+        <tr>
+            <td>WS Endpoint</td>
+            <td><input type="text" id="endpoint"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input id="btnConnect"    type="button" value="Connect"    onclick="onConnectClick()">&nbsp;&nbsp;
+                <input id="btnDisconnect" type="button" value="Disconnect" onclick="onDisconnectClick()" disabled="disabled">
+            </td>
+        </tr>
+    </table><br/>
+    <table>
+        <tr>
+            <td width="200px">Message</td>
+            <td><input type="text" id="message"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input id="btnSend" type="button" value="Send Message" onclick="onSendClick()">
+            </td>
+        </tr>
+    </table>
+
+  </body>
+</html>
